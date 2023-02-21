@@ -1,0 +1,46 @@
+.floorWrapper {
+  position: relative;
+  padding: 0 10px;
+  flex-grow: 1;
+
+  display: flex;
+  justify-content: space-between;
+
+  &:not(:first-child) {
+    border-bottom: gold solid 5px;
+  }
+
+  .floorNumWrapper {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .numWrapper {
+      font-size: 25px;
+      font-weight: bold;
+
+      cursor: pointer;
+    }
+  }
+
+  .peoples {
+    display: flex;
+    align-items: center;
+
+    img {
+      //display: none;
+      height: 40px;
+    }
+
+    .peopleCount {
+      margin-left: 10px;
+      font-weight: bold;
+      &::before {
+        margin-right: 10px;
+        content: '✖';
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.houseWrapper {
+  height: 100vh;
+  border: gold solid 10px;
+  background-color: #000050;
+
+  display: flex;
+
+  .shaftWrapper {
+    width: 100px;
+    border-right: gold solid 5px;
+  }
+
+  .floorsWrapper {
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
