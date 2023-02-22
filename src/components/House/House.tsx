@@ -4,17 +4,27 @@ import {ElevatorShaft} from "./ElevatorShaft/ElevatorShaft";
 import {v1} from "uuid";
 import {Floor} from "./Floor/Floor";
 import {useDispatch, useSelector} from "react-redux";
-import {getCurrentElevatorFloor, getPeoplesOnFloors} from "../../bll/selectors";
-import {FloorNumType, setStopPoint} from "../../bll/elevatorReducer";
+import {
+    getElevatorDownStopPoints,
+    getCurrentElevatorFloor,
+    getElevatorUpStopPoints,
+    getPeoplesOnFloors
+} from "../../bll/selectors";
+import {FloorNumType, setDownStopPoint, setUpStopPoint} from "../../bll/elevatorReducer";
 
 export const House = () => {
 
     let peoplesOnFloors = useSelector(getPeoplesOnFloors);
     let currentElevatorFloor = useSelector(getCurrentElevatorFloor);
+    let currentUpStopPoints = useSelector(getElevatorUpStopPoints);
+    let currentDownStopPoints = useSelector(getElevatorDownStopPoints);
     const dispatch = useDispatch();
 
-    const elevatorCallHandler = (floor: FloorNumType, peoples: number) => {
-        dispatch(setStopPoint(floor, peoples));
+    const elevatorUpCallHandler = (floor: FloorNumType) => {
+        dispatch(setUpStopPoint(floor));
+    };
+    const elevatorDownCallHandler = (floor: FloorNumType) => {
+        dispatch(setDownStopPoint(floor));
     };
 
     let floorsToRender = peoplesOnFloors.map((el, index) => <Floor
@@ -22,7 +32,11 @@ export const House = () => {
         floorNum={index as FloorNumType}
         peopleCount={el}
         currentElevatorFloor={currentElevatorFloor}
-        elevatorCall={elevatorCallHandler}
+        currentUpStopPoints={currentUpStopPoints}
+        currentDownStopPoints={currentDownStopPoints}
+
+        elevatorUpCall={elevatorUpCallHandler}
+        elevatorDownCall={elevatorDownCallHandler}
     />);
 
 

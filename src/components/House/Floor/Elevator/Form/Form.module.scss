@@ -1,0 +1,64 @@
+.formWrapper {
+  width: 180px;
+
+  .firstPart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .inputButtonWrapper {
+      input {
+        margin-top: 5px;
+        color: black;
+        width: 35px;
+      }
+
+      button {
+        margin-left: 5px;
+        text-align: center;
+        min-width: 50px;
+        color: black;
+      }
+    }
+  }
+
+  .secondPart {
+    label {
+      font-size: 12px;
+    }
+
+    .inputsWrapper {
+
+      .peoplesNum {
+        color: black;
+        width: 35px;
+      }
+
+      .lastAsk {
+        font-size: 12px;
+      }
+      .checkboxWrapper {
+        color: black;
+        display: flex;
+        justify-content: space-around;
+
+        .checkbox {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+        }
+      }
+    }
+  }
+
+  .message {
+    text-align: center;
+
+    button {
+      margin-top: 5px;
+      padding: 0 5px;
+      color: black;
+    }
+  }
+}

@@ -10,18 +10,23 @@
     border-bottom: gold solid 5px;
   }
 
-  .floorNumWrapper {
-
+  .panelInfoSelector {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
 
-    .numWrapper {
-      font-size: 25px;
-      font-weight: bold;
+    .floorNumWrapper {
+      text-align: center;
 
-      cursor: pointer;
+      .numWrapper {
+        font-size: 25px;
+        font-weight: bold;
+      }
+    }
+
+    .buttonWrapper {
+      margin-left: 10px;
+      display: flex;
+      flex-direction: column;
     }
   }
 
