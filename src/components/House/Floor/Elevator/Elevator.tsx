@@ -40,7 +40,6 @@ const Elevator: React.FC<ElevatorPropsType> = ({peopleCount}) => {
             </div>
 
             {status === 'stop' && <div className={s.formWrapper}>
-                {/*<div className={s.button} onClick={leaveFloorHandler}>Close</div>*/}
                 <Form
                     maxCapacity={maxCapacity}
                     currentCapacity={currentCapacity}
@@ -51,8 +50,8 @@ const Elevator: React.FC<ElevatorPropsType> = ({peopleCount}) => {
                 />
             </div>}
 
-            <div>{JSON.stringify(upStopPoints)}</div>
-            <div>{JSON.stringify(downStopPoints)}</div>
+            {/*<div>{JSON.stringify(upStopPoints)}</div>*/}
+            {/*<div>{JSON.stringify(downStopPoints)}</div>*/}
         </div>
     );
 };

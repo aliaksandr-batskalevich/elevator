@@ -5,7 +5,9 @@ export type ElevatorActionsType = ReturnType<typeof setElevatorStatus>
     | ReturnType<typeof setGlobalCourse>
     | ReturnType<typeof setCourse>
     | ReturnType<typeof setUpStopPoint>
+    | ReturnType<typeof setUpStopPointsArr>
     | ReturnType<typeof setDownStopPoint>
+    | ReturnType<typeof setDownStopPointsArr>
     | ReturnType<typeof removeUpStopPoint>
     | ReturnType<typeof removeDownStopPoint>;
 
@@ -33,7 +35,7 @@ const elevatorInitState: ElevatorStateType = {
     currentElevatorFloor: 0,
     nextElevatorFloor: undefined,
     maxCapacity: 6,
-    currentCapacity: 4,
+    currentCapacity: 0,
     globalCourse: undefined,
     course: undefined,
     upStopPoints: [],
@@ -56,8 +58,12 @@ export const elevatorReducer = (state: ElevatorStateType = elevatorInitState, ac
             return {...state, ...action.payload};
         case 'SET_UP_STOP_POINT':
             return {...state, upStopPoints: [...state.upStopPoints, action.payload.floor].sort((a, b) => a - b)};
+        case 'SET_UP_STOP_POINTS_ARR':
+            return {...state, upStopPoints: [...state.upStopPoints, ...action.payload.array].sort((a, b) => a - b)};
         case 'SET_DOWN_STOP_POINT':
             return {...state, downStopPoints: [...state.downStopPoints, action.payload.floor].sort((a, b) => b - a)};
+        case 'SET_DOWN_STOP_POINTS_ARR':
+            return {...state, downStopPoints: [...state.downStopPoints, ...action.payload.array].sort((a, b) => b - a)};
         case 'REMOVE_UP_STOP_POINT':
             return {...state, upStopPoints: state.upStopPoints.filter(floor => floor !== action.payload.floor)};
         case 'REMOVE_DOWN_STOP_POINT':
@@ -109,10 +115,22 @@ export const setUpStopPoint = (floor: FloorNumType) => {
         payload: {floor}
     } as const;
 };
+export const setUpStopPointsArr = (array: CourseStopPointsType) => {
+    return {
+        type: 'SET_UP_STOP_POINTS_ARR',
+        payload: {array}
+    } as const;
+};
 export const setDownStopPoint = (floor: FloorNumType) => {
     return {
         type: 'SET_DOWN_STOP_POINT',
         payload: {floor}
+    } as const;
+};
+export const setDownStopPointsArr = (array: CourseStopPointsType) => {
+    return {
+        type: 'SET_DOWN_STOP_POINTS_ARR',
+        payload: {array}
     } as const;
 };
 export const removeUpStopPoint = (floor: FloorNumType) => {

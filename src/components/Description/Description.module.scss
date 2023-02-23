@@ -1,0 +1,24 @@
+.descriptionWrapper {
+  padding: 10px;
+  max-width: 50%;
+
+  > *, > * > * {
+    color: black;
+  }
+
+  > *:not(:first-child) {
+    margin-top: 10px;
+  }
+
+  ol {
+    list-style-position: inside;
+
+    li {
+      color: black;
+
+      &:not(:first-child) {
+        margin-top: 3px;
+      }
+    }
+  }
+}

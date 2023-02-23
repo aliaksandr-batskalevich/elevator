@@ -8,7 +8,14 @@ import {
     getFormPart
 } from "../../../../../bll/selectors";
 import {setFormPart} from "../../../../../bll/appReducer";
-import {CourseType, FloorNumType, setCurrentCapacity} from "../../../../../bll/elevatorReducer";
+import {
+    CourseStopPointsType,
+    CourseType,
+    FloorNumType,
+    setCurrentCapacity,
+    setDownStopPointsArr,
+    setUpStopPointsArr
+} from "../../../../../bll/elevatorReducer";
 import {addPeoplesNumOnFloor, remPeoplesNumOnFloor} from "../../../../../bll/floorsReducer";
 import {v1} from "uuid";
 
@@ -55,9 +62,12 @@ export const Form: React.FC<FormPropsType> = ({
             checkedFloors: [] as Array<string>,
         },
         onSubmit(values) {
+            let checkedFloorsNum = values.checkedFloors.map(floor => +floor) as CourseStopPointsType;
             peopleBalanceHandler(values.incomingPeople, 'in');
             dispatch(setFormPart('firstPage'));
-            // create logic for add stopPoints
+            globalCourse === 'up'
+                ? dispatch(setUpStopPointsArr(checkedFloorsNum))
+                : dispatch(setDownStopPointsArr(checkedFloorsNum));
             leaveFloor();
             // alert(JSON.stringify(values));
         },
@@ -82,7 +92,7 @@ export const Form: React.FC<FormPropsType> = ({
     const messageButtonOnclickHandler = () => {
         leaveFloor();
         dispatch(setFormPart('firstPage'));
-    }
+    };
 
 
     let buttonTitle = !formik.values.leavePeople ? 'No one' : 'Go';
@@ -115,47 +125,55 @@ export const Form: React.FC<FormPropsType> = ({
     return (
 
         <form className={s.formWrapper} onSubmit={formik.handleSubmit}>
-            {formPart === 'firstPage' && <div className={s.firstPart}>
-                <label htmlFor="leavePeople">How many people go out?</label>
-                <div className={s.inputButtonWrapper}>
-                    <input
-                        type='number'
-                        id='leavePeople'
-                        name='leavePeople'
-                        onChange={inputLeaveHandleChange}
-                        value={formik.values.leavePeople}
-                        onBlur={formik.handleBlur}
-                    />
-                    <button
-                        type='button'
-                        onClick={setSecondPartHandler}
-                    >{buttonTitle}</button>
-                </div>
-            </div>}
-            {formPart === 'secondPage'
-            && (maxCapacity === currentCapacity
-                ? <div className={s.message}>
-                    <p>Sorry, the elevator is full, try calling the next one.</p>
-                    <button type='button' onClick={messageButtonOnclickHandler}>Close the doors</button>
-                </div>
-                : <div className={s.secondPart}>
-                    <label htmlFor="leavePeople">How many people incoming?</label>
-                    <div className={s.inputsWrapper}>
+            {formPart === 'firstPage'
+            && (currentCapacity
+                ? <div className={s.firstPart}>
+                    <label htmlFor="leavePeople">How many people go out?</label>
+                    <div className={s.inputButtonWrapper}>
                         <input
-                            className={s.peoplesNum}
                             type='number'
-                            id='incomingPeople'
-                            name='incomingPeople'
-                            onChange={inputIncomingHandleChange}
-                            value={formik.values.incomingPeople}
+                            id='leavePeople'
+                            name='leavePeople'
+                            onChange={inputLeaveHandleChange}
+                            value={formik.values.leavePeople}
                             onBlur={formik.handleBlur}
                         />
-                        <p className={s.lastAsk}>Which floors?</p>
-                        <div className={s.checkboxWrapper}>
-                            {checkboxToRender}
-                        </div>
-                        <button type='submit'>+</button>
+                        <button
+                            type='button'
+                            onClick={setSecondPartHandler}
+                        >{buttonTitle}</button>
                     </div>
+                </div>
+                : <div className={s.message}>
+                    <p>The elevator is empty, it can fit 6 people.</p>
+                    <button type='button' onClick={setSecondPartHandler}>Continue</button>
+                </div>)}
+            {formPart === 'secondPage'
+            && (maxCapacity !== currentCapacity
+                ? <div className={s.secondPart}>
+                    <label htmlFor="leavePeople">Incoming people</label>
+                    <input
+                        className={s.peoplesNum}
+                        type='number'
+                        id='incomingPeople'
+                        name='incomingPeople'
+                        onChange={inputIncomingHandleChange}
+                        value={formik.values.incomingPeople}
+                        onBlur={formik.handleBlur}
+                    />
+
+                    <p className={s.lastAsk}>Which floors?</p>
+                    <div className={s.checkboxWrapper}>
+                        {checkboxToRender}
+                    </div>
+
+                    <div className={s.buttonWrapper}>
+                        <button type='submit'>Close the doors</button>
+                    </div>
+                </div>
+                : <div className={s.message}>
+                    <p>Sorry, the elevator is full, try calling the next one.</p>
+                    <button type='button' onClick={messageButtonOnclickHandler}>Close the doors</button>
                 </div>)}
         </form>
 

@@ -82,6 +82,15 @@ export const ElevatorShaft = () => {
             }
 
         }
+
+        // to intercept the elevator in moves
+        if (status === 'move' && globalCourse === 'up' && currentUpStopPoints.length && nextElevatorFloor !== currentUpStopPoints[0]) {
+            dispatch(setNextFloor(currentUpStopPoints[0]));
+        }
+        if (status === 'move' && globalCourse === 'down' && currentDownStopPoints.length && nextElevatorFloor !== currentDownStopPoints[0]) {
+            dispatch(setNextFloor(currentDownStopPoints[0]));
+        }
+
     }, [currentUpStopPoints, currentDownStopPoints, upStopPoints, downStopPoints, status]);
 
 

@@ -23,31 +23,42 @@
   }
 
   .secondPart {
+
     label {
-      font-size: 12px;
+      font-size: 14px;
     }
 
-    .inputsWrapper {
+    .peoplesNum {
+      margin-left: 5px;
+      color: black;
+      width: 35px;
+    }
 
-      .peoplesNum {
-        color: black;
-        width: 35px;
-      }
 
-      .lastAsk {
-        font-size: 12px;
-      }
-      .checkboxWrapper {
-        color: black;
+    .lastAsk {
+      font-size: 14px;
+    }
+
+    .checkboxWrapper {
+      color: black;
+      display: flex;
+      justify-content: space-around;
+
+      .checkbox {
         display: flex;
-        justify-content: space-around;
+        flex-direction: column;
+        align-items: center;
 
-        .checkbox {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
+      }
 
-        }
+    }
+
+    .buttonWrapper {
+      text-align: center;
+
+      button {
+        color: black;
+        padding: 0 5px;
       }
     }
   }
