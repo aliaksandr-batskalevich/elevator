@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/elevator/static/css/main.54e10c4f.css",
+    "main.js": "/elevator/static/js/main.ba4d959b.js",
+    "static/js/787.f05f7f12.chunk.js": "/elevator/static/js/787.f05f7f12.chunk.js",
+    "static/media/man.webp": "/elevator/static/media/man.c177590b74a75d2d0d32.webp",
+    "index.html": "/elevator/index.html",
+    "main.54e10c4f.css.map": "/elevator/static/css/main.54e10c4f.css.map",
+    "main.ba4d959b.js.map": "/elevator/static/js/main.ba4d959b.js.map",
+    "787.f05f7f12.chunk.js.map": "/elevator/static/js/787.f05f7f12.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.54e10c4f.css",
+    "static/js/main.ba4d959b.js"
+  ]
+}
